@@ -1,0 +1,67 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table producto{
+	clave_producto integer [primary key]
+	descripcion_producto varchar
+	clave_subfamilia integer
+	descripcion_subfamilia varchar
+	clave_familia integer
+	descripcion_familia varchar
+	clave_departamento integer
+	descripcion_departament varchar
+}
+
+Table cliente{
+	clave_cliente integer [primary key]
+	descripcion_cliente varchar
+	clave_clasificacion integer
+	descripcion_clasificacion varchar
+	clave_sector integer
+	descripcion_sector varchar
+}
+
+Table tienda{
+	clave_tienda integer [primary key]
+	descripcion_tienda varchar
+	clave_zona integer
+	descripcion_zona varchar
+	clave_estado integer
+	descripcion_estado varchar
+	clave_pais integer
+	descripcion_pais varchar
+}
+
+Table vendedor{
+	clave_vendedor integer [primary key]
+	descripcion_vendedor varchar
+	clave_supervisor integer
+	descripcion_supervisor varchar
+}
+
+Table fecha{
+	clave_dia integer [primary key]
+	clave_mes integer
+	clave_año integer
+}
+
+Table tabla_hechos{
+	clave_dia integer
+	clave_tienda integer
+	clave_vendedor integer
+	clave_cliente integer
+	clave_producto integer
+	ventas bigint
+	costos bigint
+	unidades varchar
+	descuentos varchar
+	devoluciones varchar
+	venta_objetivo varchar
+	costo_presupuesto varchar
+}
+
+Ref: tabla_hechos.clave_dia > fecha.clave_dia
+Ref: tabla_hechos.clave_tienda > tienda.clave_tienda
+Ref: tabla_hechos.clave_vendedor > vendedor.clave_vendedor
+Ref: tabla_hechos.clave_cliente> cliente.clave_cliente
+Ref: tabla_hechos.clave_producto> producto.clave_producto
