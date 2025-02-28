@@ -55,7 +55,7 @@ Table tabla_hechos{
 	costos bigint
 	unidades varchar
 	descuentos varchar
-	devoluciones varchar
+	devoluciones bigint
 	venta_objetivo varchar
 	costo_presupuesto varchar
 }
