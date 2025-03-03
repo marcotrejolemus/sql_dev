@@ -66,3 +66,31 @@ WHERE f.clave_año = 2003
 GROUP BY t.clave_estado, t.descripcion_estado
 ORDER BY porcentaje_margen DESC
 LIMIT 5;
+
+-- ## Tiendas debajo promedio ventas mes septiembre 2004
+SELECT 
+   c.clave_sector, 
+    c.descripcion_sector,
+    SUM((th.devoluciones)) AS total_devoluciones
+FROM tabla_hechos th
+JOIN cliente c ON th.clave_cliente = c.clave_cliente
+GROUP BY c.clave_sector, c.descripcion_sector
+ORDER BY total_devoluciones DESC
+LIMIT 3;
+
+-- ## 3 sectores cte con > numero devoluciones
+SELECT 
+     t.clave_estado,t.descripcion_tienda, 
+     t.descripcion_estado,
+     SUM(th.ventas) AS total_ventas,
+     SUM(th.costos) AS total_costos,
+     (SUM(th.ventas) / NULLIF(COUNT(th.ventas), 0)) AS promedio_ventas, COUNT(th.ventas)
+FROM tabla_hechos th
+JOIN tienda t ON th.clave_tienda = t.clave_tienda
+JOIN fecha f ON th.clave_dia = f.clave_dia
+WHERE f.clave_año = 2004
+  AND f.clave_mes = 9
+  AND total_ventas < promedio_ventas 
+GROUP BY t.clave_estado, descripcion_tienda, t.descripcion_estado
+ORDER BY promedio_ventas DESC
+LIMIT 5;
