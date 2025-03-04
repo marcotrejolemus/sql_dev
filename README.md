@@ -18,7 +18,9 @@ This guide provides a step-by-step process to convert a DBML file into a Microso
 Ensure your DBML file (e.g., schema.dbml) is in your working directory. This file contains the database schema in DBML format.
 ## 2. Convert the DBML File
 Run the following command to convert your DBML file to a SQL script for Microsoft SQL Server:
-**dbml2sql -s mssql schema.dbml -o output.sql**
+
+dbml2sql -s mssql schema.dbml -o output.sql
+
 Explanation:
 -s mssql: Specifies that the output should use the Microsoft SQL Server dialect.
 schema.dbml: The input DBML file.
